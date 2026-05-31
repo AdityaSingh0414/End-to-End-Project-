@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LoanAI — AI-powered multi-bank loan recommendation engine with explainable predictions, bank comparison, and real-time analytics." />
+  <title>LoanAI — Smart Loan Approval & Bank Recommendation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">&#9889;</span>
+      <span class="brand-name">LoanAI</span>
+      <span class="brand-tag">ML POWERED</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active" data-page="dashboard">Dashboard</button>
+      <button class="nav-link" data-page="apply">Apply Now</button>
+      <button class="nav-link" data-page="analytics">Analytics</button>
+    </div>
+    <div class="nav-badge">
+      <span class="badge-dot"></span>
+      Live Model
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE 1: DASHBOARD
+       ═══════════════════════════════════════════════════════ -->
+  <div class="page active" id="page-dashboard">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">&#x1F916; AI-Powered Decision Engine</div>
+        <h1>Smart Loan Approval<br /><span class="gradient-text">Prediction System</span></h1>
+        <p class="hero-sub">Harness the power of machine learning to get instant, data-driven loan eligibility predictions with explainable AI insights across 10 major banks.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('apply')">Apply for Loan</button>
+          <button class="btn-ghost" onclick="showPage('analytics')">View Analytics</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="stat-float">
+          <span class="stat-num" id="hero-accuracy">--</span>
+          <span class="stat-label">Model Accuracy</span>
+        </div>
+        <div class="circle-ring">
+          <div class="circle-inner">
+            <span class="circle-icon">&#128202;</span>
+            <span class="circle-text">AI Model</span>
+          </div>
+        </div>
+        <div class="stat-float">
+          <span class="stat-num" id="hero-auc">--</span>
+          <span class="stat-label">ROC-AUC Score</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Metrics -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Model <span class="gradient-text">Performance</span></h2>
+        <p>Real-time metrics from the trained ML pipeline</p>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">&#127919;</div>
+          <div class="metric-value" id="m-accuracy">--</div>
+          <div class="metric-label">Accuracy</div>
+          <div class="metric-bar"><div class="metric-fill" id="bar-accuracy"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#9878;&#65039;</div>
+          <div class="metric-value" id="m-f1">--</div>
+          <div class="metric-label">F1 Score</div>
+          <div class="metric-bar"><div class="metric-fill" id="bar-f1"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#128200;</div>
+          <div class="metric-value" id="m-auc">--</div>
+          <div class="metric-label">ROC-AUC</div>
+          <div class="metric-bar"><div class="metric-fill" id="bar-auc"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#129302;</div>
+          <div class="metric-value" id="m-model">--</div>
+          <div class="metric-label">Best Model</div>
+          <div class="metric-sub">Auto-selected via cross-validation</div>
+        </div>
+      </div>
+
+      <!-- Feature Importance Chart -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3>Feature Importance</h3>
+          <p class="chart-sub">Top factors driving loan decisions</p>
+          <div class="chart-wrap"><canvas id="dashFeatureChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Partner Banks</h3>
+          <p class="chart-sub">10 banks with unique policies</p>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;max-height:280px;overflow-y:auto;padding-right:6px;">
+            <div id="bankQuickList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bank Overview Grid -->
+    <section class="section" style="background:var(--bg-800);">
+      <div class="section-header">
+        <h2>Bank <span class="gradient-text">Directory</span></h2>
+        <p>Detailed policies for all partner banks</p>
+      </div>
+      <div class="bank-overview-grid" id="bankOverviewGrid">
+        <div class="bank-mini-card"><p style="color:var(--text-500)">Loading bank data...</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE 2: APPLY NOW
+       ═══════════════════════════════════════════════════════ -->
+  <div class="page" id="page-apply">
+    <section class="section apply-section">
+      <div class="section-header">
+        <h2>Apply for a <span class="gradient-text">Loan</span></h2>
+        <p>Fill your details and our AI will instantly find the best bank for you</p>
+      </div>
+
+      <div class="form-container">
+        <div class="form-title">&#128196; Loan Application Form</div>
+        <div class="form-desc">All fields marked with <span class="req">*</span> are required. We compare 10 banks in real-time.</div>
+
+        <form id="loan-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="f-age">Age <span class="req">*</span></label>
+              <input type="number" id="f-age" placeholder="e.g. 30" min="18" max="80" required />
+              <span class="field-hint">Must be 21-65 for most banks</span>
+            </div>
+            <div class="form-group">
+              <label for="f-income">Monthly Income (&#8377;) <span class="req">*</span></label>
+              <input type="number" id="f-income" placeholder="e.g. 80000" min="0" required />
+              <span class="field-hint">Pre-tax monthly income</span>
+            </div>
+            <div class="form-group">
+              <label for="f-credit">Credit Score <span class="req">*</span></label>
+              <input type="number" id="f-credit" placeholder="e.g. 750" min="300" max="900" required />
+              <span class="field-hint">CIBIL score (300-900)</span>
+            </div>
+            <div class="form-group">
+              <label for="f-employment">Employment Type <span class="req">*</span></label>
+              <select id="f-employment" required>
+                <option value="Salaried">Salaried</option>
+                <option value="Self-Employed">Self-Employed</option>
+                <option value="Business">Business Owner</option>
+                <option value="Retired">Retired</option>
+                <option value="Unemployed">Unemployed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-emis">Existing Monthly EMIs (&#8377;)</label>
+              <input type="number" id="f-emis" placeholder="e.g. 5000" min="0" value="0" />
+              <span class="field-hint">Total existing EMI commitments</span>
+            </div>
+            <div class="form-group">
+              <label for="f-loan">Loan Amount Requested (&#8377;) <span class="req">*</span></label>
+              <input type="number" id="f-loan" placeholder="e.g. 3000000" min="10000" required />
+              <span class="field-hint">Total loan amount needed</span>
+            </div>
+            <div class="form-group span-2">
+              <label for="f-property">Property Ownership</label>
+              <select id="f-property">
+                <option value="true">Yes &#8212; I own property</option>
+                <option value="false" selected>No</option>
+              </select>
+              <span class="field-hint">Owning property may help with collateral-based approvals</span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-predict" id="submit-btn">
+              <span id="btn-text">&#128640; Find Best Banks</span>
+              <div class="spinner hidden" id="btn-loader"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ═══ RESULTS AREA ═══ -->
+      <div class="results-area" id="resultsArea">
+
+        <!-- Decision Banner -->
+        <div class="decision-banner" id="decisionBanner">
+          <div class="decision-icon" id="decisionIcon"></div>
+          <div class="decision-text" id="decisionText"></div>
+          <div class="decision-sub" id="decisionSub"></div>
+        </div>
+
+        <!-- Best Bank Card -->
+        <div class="best-bank-card" id="bestBankCard" style="display:none;">
+          <div class="best-badge">&#127942; #1 Recommended</div>
+          <div class="best-bank-name" id="bestBankName"></div>
+          <div class="best-bank-stats">
+            <div class="bstat-item"><div class="bstat-value" id="bestProb">-</div><div class="bstat-label">Approval</div></div>
+            <div class="bstat-item"><div class="bstat-value" id="bestRate">-</div><div class="bstat-label">Interest Rate</div></div>
+            <div class="bstat-item"><div class="bstat-value" id="bestLoan">-</div><div class="bstat-label">Max Loan</div></div>
+            <div class="bstat-item"><div class="bstat-value" id="bestDays">-</div><div class="bstat-label">Processing</div></div>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="sh-inline"><span class="icon">&#9878;&#65039;</span> Bank Comparison</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th><th>Bank</th><th>Status</th><th>Approval</th>
+                <th>Rate</th><th>Max Loan</th><th>Collateral</th><th>Speed</th><th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Conditional Offer -->
+        <div class="conditional-card hidden" id="conditionalCard">
+          <h3>&#9888;&#65039; Conditional Offer Available</h3>
+          <p style="margin-bottom:8px;"><strong id="condBank"></strong> can approve with conditions:</p>
+          <ul class="conditions-list" id="condList"></ul>
+          <p style="margin-top:10px;font-size:0.82rem;color:var(--text-500);">Max conditional loan: <strong id="condMaxLoan"></strong></p>
+        </div>
+
+        <!-- Feature Importance Chips -->
+        <div class="sh-inline"><span class="icon">&#129504;</span> Top Decision Factors</div>
+        <div class="features-grid" id="featuresGrid"></div>
+
+        <!-- Chatbot -->
+        <div class="chatbot-card">
+          <h3>&#128172; AI Assistant</h3>
+          <div class="quick-buttons">
+            <button class="quick-btn" type="button" data-q="Why is this the best bank for me?">Why best bank?</button>
+            <button class="quick-btn" type="button" data-q="Compare all eligible banks">Compare banks</button>
+            <button class="quick-btn" type="button" data-q="Tell me about conditional offers">Conditional offers</button>
+            <button class="quick-btn" type="button" data-q="What about SBI?">About SBI</button>
+            <button class="quick-btn" type="button" data-q="What about HDFC Bank?">About HDFC</button>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-bubble bot">Hi! Submit a loan application above and I'll help explain the recommendations.</div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput" placeholder="Ask about your recommendations..." />
+            <button class="chat-send" id="chatSendBtn" type="button">Send</button>
+          </div>
+        </div>
+
+        <!-- Reset -->
+        <div style="text-align:center;margin:1.5rem 0;">
+          <button class="btn-ghost" onclick="resetForm()">&#x21BB; New Application</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PAGE 3: ANALYTICS
+       ═══════════════════════════════════════════════════════ -->
+  <div class="page" id="page-analytics">
+    <section class="section">
+      <div class="section-header">
+        <h2>Model <span class="gradient-text">Analytics</span></h2>
+        <p>Detailed evaluation of the trained machine learning pipeline</p>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3>Cross-Validation Comparison</h3>
+          <p class="chart-sub">F1 scores across candidate models (5-fold stratified CV)</p>
+          <div class="chart-wrap"><canvas id="cvChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Approval Distribution</h3>
+          <p class="chart-sub">Overall approved vs rejected in test set</p>
+          <div class="chart-wrap"><canvas id="donutChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="chart-card">
+          <h3>Full Feature Importance</h3>
+          <p class="chart-sub">All features ranked by contribution to prediction</p>
+          <div class="chart-wrap"><canvas id="featFullChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Confusion Matrix</h3>
+          <p class="chart-sub">True vs predicted labels on test data</p>
+          <div class="confusion-matrix" id="confusion-matrix">
+            <p style="color:var(--text-500);font-size:0.9rem;">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon">&#129302;</div>
+          <h4>Hybrid AI Engine</h4>
+          <p>Rule-based eligibility checks combined with ML probability predictions for each bank individually.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">&#128737;&#65039;</div>
+          <h4>Explainable Decisions</h4>
+          <p>Every recommendation comes with reasons — credit score impact, DTI analysis, and bank-specific policies.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">&#9889;</div>
+          <h4>Real-time Performance</h4>
+          <p>Model loaded once at startup. In-memory caching delivers responses in under 500ms for repeated queries.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-brand">&#9889; LoanAI</div>
+    <p>AI-Powered Multi-Bank Loan Recommendation Engine</p>
+    <p class="footer-note">Built with Python, Flask, XGBoost & Chart.js &nbsp;|&nbsp; <a href="/health" style="color:var(--blue-400);text-decoration:none;">API Health</a></p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

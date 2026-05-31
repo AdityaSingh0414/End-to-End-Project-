@@ -1,0 +1,106 @@
+[2026-03-20 14:33:05] INFO — preprocess — Loading raw data from: data\raw\loan_data.csv
+[2026-03-20 14:33:05] INFO — preprocess — Shape: (5000, 13)  |  Columns: ['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
+[2026-03-20 14:33:05] INFO — preprocess — Dropped 'Loan_ID' column.
+[2026-03-20 14:33:05] INFO — preprocess — Handling missing values...
+[2026-03-20 14:33:05] INFO — preprocess — Encoding categorical columns...
+[2026-03-20 14:33:05] INFO — preprocess — Engineering new features...
+[2026-03-20 14:33:05] INFO — preprocess —   Added: Total_Income, Income_to_Loan_Ratio, EMI, Balance_Income
+[2026-03-20 14:33:05] INFO — preprocess — Final shape: (5000, 16)
+[2026-03-20 14:33:05] INFO — preprocess — Class distribution:
+Loan_Status
+1    4225
+0     775
+Name: count, dtype: int64
+[2026-03-20 14:36:43] INFO â€” train â€” Loading: data\processed\clean_data.csv
+[2026-03-20 14:36:43] INFO â€” train â€” Features (15): ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Total_Income', 'Income_to_Loan_Ratio', 'EMI', 'Balance_Income']
+[2026-03-20 14:36:43] INFO â€” train â€” Class distribution: {1: np.int64(4225), 0: np.int64(775)}
+[2026-03-20 14:36:43] INFO â€” train â€” Train: (4000, 15)  |  Test: (1000, 15)
+[2026-03-20 14:37:17] INFO â€” train â€” [Random Forest] Acc=0.9890 | F1=0.9935 | AUC=0.9549
+[2026-03-20 14:37:18] INFO â€” utils â€” Saved -> models\loan_model.pkl
+[2026-03-20 14:37:18] INFO â€” utils â€” Saved -> models\feature_importance.pkl
+[2026-03-20 14:37:20] INFO â€” train â€” Training complete!
+[2026-03-20 15:20:06] INFO — generate_bank_data — Approval rate: 55.44%
+[2026-03-20 15:20:31] INFO — train_bank_model — Loading data\bank\bank_loan_data.csv
+[2026-03-20 15:20:31] INFO — train_bank_model — Shape: (10000, 10)  |  Class dist: {1: np.int64(5544), 0: np.int64(4456)}
+[2026-03-20 15:20:31] INFO — train_bank_model — Train: (8000, 10)  |  Test: (2000, 10)
+[2026-03-20 15:22:44] INFO — train_bank_model — Loading data\bank\bank_loan_data.csv
+[2026-03-20 15:22:44] INFO — train_bank_model — Shape: (10000, 10)  |  Class dist: {1: np.int64(5544), 0: np.int64(4456)}
+[2026-03-20 15:22:44] INFO — train_bank_model — Scaler saved -> models\bank_preprocessor.pkl
+[2026-03-20 15:22:44] INFO — train_bank_model — Train: (8000, 10)  |  Test: (2000, 10)
+[2026-03-20 15:23:37] INFO — train_bank_model — Model saved -> models\bank_model.pkl
+[2026-03-20 15:23:37] INFO — train_bank_model — Metrics saved -> models\bank_metrics.json
+[2026-03-20 15:24:27] INFO — bank_predict — Bank model artifacts loaded (cached).
+[2026-04-01 00:52:39] INFO — preprocess — Loading raw data from: data\raw\loan_data.csv
+[2026-04-01 00:52:39] INFO — preprocess — Shape: (5000, 13)  |  Columns: ['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
+[2026-04-01 00:52:39] INFO — preprocess — Dropped 'Loan_ID' column.
+[2026-04-01 00:52:39] INFO — preprocess — Handling missing values...
+[2026-04-01 00:52:39] INFO — preprocess — Encoding categorical columns...
+[2026-04-01 00:52:39] INFO — preprocess — Engineering new features...
+[2026-04-01 00:52:39] INFO — preprocess —   Added: Total_Income, Income_to_Loan_Ratio, EMI, Balance_Income
+[2026-04-01 00:52:39] INFO — utils — Saved -> models\preprocessor.pkl
+[2026-04-01 00:52:39] INFO — preprocess — Final shape: (5000, 16)
+[2026-04-01 00:52:39] INFO — preprocess — Class distribution:
+Loan_Status
+1    4225
+0     775
+Name: count, dtype: int64
+[2026-04-01 00:52:49] INFO — train — Loading: data\processed\clean_data.csv
+[2026-04-01 00:52:49] INFO — train — Features (15): ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Total_Income', 'Income_to_Loan_Ratio', 'EMI', 'Balance_Income']
+[2026-04-01 00:52:49] INFO — train — Class distribution: {1: 4225, 0: 775}
+[2026-04-01 00:52:49] INFO — train — Train: (4000, 15)  |  Test: (1000, 15)
+[2026-04-01 00:53:06] INFO — generate_bank_data — Approval rate: 55.44%
+[2026-04-01 00:53:06] INFO — generate_bank_data — Saved 10000 rows -> data\bank\bank_loan_data.csv
+[2026-04-01 00:53:09] INFO — train_bank_model — Loading data\bank\bank_loan_data.csv
+[2026-04-01 00:53:09] INFO — train_bank_model — Shape: (10000, 10)  |  Class dist: {1: 5544, 0: 4456}
+[2026-04-01 00:53:09] INFO — train_bank_model — Scaler saved -> models\bank_preprocessor.pkl
+[2026-04-01 00:53:09] INFO — train_bank_model — Train: (8000, 10)  |  Test: (2000, 10)
+[2026-04-01 00:53:40] INFO — train_bank_model — Model saved -> models\bank_model.pkl
+[2026-04-01 00:53:40] INFO — train_bank_model — Metrics saved -> models\bank_metrics.json
+[2026-04-01 00:54:06] INFO — train — Loading: data\processed\clean_data.csv
+[2026-04-01 00:54:06] INFO — train — Features (15): ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Total_Income', 'Income_to_Loan_Ratio', 'EMI', 'Balance_Income']
+[2026-04-01 00:54:06] INFO — train — Class distribution: {1: 4225, 0: 775}
+[2026-04-01 00:54:06] INFO — train — Train: (4000, 15)  |  Test: (1000, 15)
+[2026-04-01 00:54:26] INFO — train — [Random Forest] Acc=0.9890 | F1=0.9935 | AUC=0.9549
+[2026-04-01 00:54:49] INFO — train — Loading: data\processed\clean_data.csv
+[2026-04-01 00:54:49] INFO — train — Features (15): ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Total_Income', 'Income_to_Loan_Ratio', 'EMI', 'Balance_Income']
+[2026-04-01 00:54:49] INFO — train — Class distribution: {1: 4225, 0: 775}
+[2026-04-01 00:54:49] INFO — train — Train: (4000, 15)  |  Test: (1000, 15)
+[2026-04-01 00:55:09] INFO — train — [Random Forest] Acc=0.9890 | F1=0.9935 | AUC=0.9549
+[2026-04-01 00:55:09] INFO — utils — Saved -> models\loan_model.pkl
+[2026-04-01 00:55:09] INFO — utils — Saved -> models\feature_importance.pkl
+[2026-04-01 00:55:11] INFO — train — Training complete!
+[2026-04-01 00:57:04] INFO — bank_predict — Bank model artifacts loaded (cached).
+[2026-04-19 21:45:44] INFO — preprocess — Loading raw data from: data\raw\loan_data.csv
+[2026-04-19 21:45:44] INFO — preprocess — Shape: (5000, 13)  |  Columns: ['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
+[2026-04-19 21:45:44] INFO — preprocess — Dropped 'Loan_ID' column.
+[2026-04-19 21:45:44] INFO — preprocess — Handling missing values...
+[2026-04-19 21:45:44] INFO — preprocess — Encoding categorical columns...
+[2026-04-19 21:45:44] INFO — preprocess — Engineering new features...
+[2026-04-19 21:45:44] INFO — preprocess —   Added: Total_Income, Income_to_Loan_Ratio, EMI, Balance_Income
+[2026-04-19 21:45:44] INFO — utils — Saved -> models\preprocessor.pkl
+[2026-04-19 21:45:44] INFO — preprocess — Final shape: (5000, 16)
+[2026-04-19 21:45:44] INFO — preprocess — Class distribution:
+1    4225
+0     775
+Name: Loan_Status, dtype: int64
+[2026-04-19 21:46:05] INFO — preprocess — Loading raw data from: data\raw\loan_data.csv
+[2026-04-19 21:46:05] INFO — preprocess — Shape: (5000, 13)  |  Columns: ['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status']
+[2026-04-19 21:46:05] INFO — preprocess — Dropped 'Loan_ID' column.
+[2026-04-19 21:46:05] INFO — preprocess — Handling missing values...
+[2026-04-19 21:46:05] INFO — preprocess — Encoding categorical columns...
+[2026-04-19 21:46:05] INFO — preprocess — Engineering new features...
+[2026-04-19 21:46:05] INFO — preprocess —   Added: Total_Income, Income_to_Loan_Ratio, EMI, Balance_Income
+[2026-04-19 21:46:05] INFO — utils — Saved -> models\preprocessor.pkl
+[2026-04-19 21:46:05] INFO — preprocess — Final shape: (5000, 16)
+[2026-04-19 21:46:05] INFO — preprocess — Class distribution:
+1    4225
+0     775
+Name: Loan_Status, dtype: int64
+[2026-04-19 21:46:19] INFO — train — Loading: data\processed\clean_data.csv
+[2026-04-19 21:46:19] INFO — train — Features (15): ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Total_Income', 'Income_to_Loan_Ratio', 'EMI', 'Balance_Income']
+[2026-04-19 21:46:19] INFO — train — Class distribution: {1: 4225, 0: 775}
+[2026-04-19 21:46:19] INFO — train — Train: (4000, 15)  |  Test: (1000, 15)
+[2026-04-19 21:46:29] INFO — train — [Random Forest] Acc=0.9890 | F1=0.9935 | AUC=0.9549
+[2026-04-19 21:46:29] INFO — utils — Saved -> models\loan_model.pkl
+[2026-04-19 21:46:29] INFO — utils — Saved -> models\feature_importance.pkl
+[2026-04-19 21:46:30] INFO — train — Training complete!

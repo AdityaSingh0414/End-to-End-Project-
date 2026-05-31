@@ -1,0 +1,47 @@
+{
+  "model_name": "XGBoost",
+  "accuracy": 0.9045,
+  "precision": 0.904,
+  "recall": 0.9261,
+  "f1_score": 0.9149,
+  "roc_auc": 0.97,
+  "confusion_matrix": [
+    [
+      782,
+      109
+    ],
+    [
+      82,
+      1027
+    ]
+  ],
+  "cv_scores": {
+    "XGBoost": 0.9125,
+    "Gradient Boosting": 0.9116,
+    "Random Forest": 0.9064
+  },
+  "feature_names": [
+    "credit_score",
+    "monthly_income",
+    "age",
+    "existing_emis",
+    "employment_type",
+    "loan_amount",
+    "property_owned",
+    "annual_income",
+    "dti_ratio",
+    "income_to_loan_ratio"
+  ],
+  "feature_importances": {
+    "credit_score": 0.321486,
+    "annual_income": 0.124209,
+    "employment_type": 0.113788,
+    "monthly_income": 0.091601,
+    "property_owned": 0.090878,
+    "dti_ratio": 0.086946,
+    "income_to_loan_ratio": 0.062188,
+    "existing_emis": 0.03985,
+    "loan_amount": 0.035696,
+    "age": 0.033358
+  }
+}

@@ -1,0 +1,13 @@
+Timestamp,Filename,Mode,Raw Text,Corrected Text,Average Confidence
+2026-05-29T20:06:50.956183,canvas_drawing.png,auto,4,I,0.8939
+2026-05-29T20:07:04.959744,canvas_drawing.png,auto,4,I,0.8939
+2026-05-29T20:08:19.238235,canvas_drawing.png,letters,Z,I,0.3907
+2026-05-29T20:08:22.421252,canvas_drawing.png,letters,T,IT,0.9063
+2026-05-29T20:08:45.371129,canvas_drawing.png,letters,L,I,0.6413
+2026-05-29T20:09:38.755209,canvas_drawing.png,digits,7,7,0.4709
+2026-05-29T20:10:30.652285,canvas_drawing.png,letters,ZLU,ZLU,0.6869
+2026-05-29T20:12:12.555949,Screenshot 2026-05-29 201141.png,letters,ZZZWXKIZRU QZ WIKIWZQ QZII MXZZIQRZ,ZZZWXKIZRU QZ WIKIWZQ QZII MXZZIQRZ,0.6065
+2026-05-29T20:14:45.982977,canvas_drawing.png,letters,ZKU,ZKU,0.6861
+2026-05-29T20:15:17.734637,canvas_drawing.png,letters,T,IT,0.4473
+2026-05-29T20:15:41.114177,canvas_drawing.png,letters,Z,I,0.5643
+2026-05-29T20:23:10.540605,Screenshot 2026-05-29 202253.png,auto,W,I,0.9597
