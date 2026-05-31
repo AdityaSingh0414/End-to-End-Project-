@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare AI Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Clinical Intelligence Demo</span>
+        <h1>Healthcare AI that feels like a product, not just a model endpoint.</h1>
+        <p>
+          Assess patient risk, generate clinician-style summaries, preview uploads, and review prediction history
+          from one modern dashboard built for portfolio storytelling.
+        </p>
+        <div class="hero-actions">
+          <a href="#workspace" class="button primary">Launch Workspace</a>
+          <a href="#history-panel" class="button secondary">View History</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="metric">
+          <span class="metric-label">Prediction Latency</span>
+          <strong>&lt; 2 sec</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Architecture</span>
+          <strong>FastAPI + RAG</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Use Cases</span>
+          <strong>Triage, Reports, Uploads</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip">
+      <article>
+        <span>01</span>
+        <p>Modular backend with services, routes, schemas, and SQL models.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <p>ML-inspired risk scoring plus retrieval-backed recommendations.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <p>Visually stronger frontend with animated cards and glass panels.</p>
+      </article>
+    </section>
+
+    <main id="workspace" class="workspace">
+      <section class="panel form-panel">
+        <div class="panel-header">
+          <h2>Patient Intake</h2>
+          <p>Enter a patient profile to generate a healthcare AI risk assessment.</p>
+        </div>
+        <form id="prediction-form">
+          <div class="grid two">
+            <label>
+              <span>Patient Name</span>
+              <input type="text" name="patient_name" value="Aarav Sharma" required>
+            </label>
+            <label>
+              <span>Gender</span>
+              <select name="gender">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <div class="grid three">
+            <label><span>Age</span><input type="number" name="age" value="52" min="0" max="120" required></label>
+            <label><span>Glucose</span><input type="number" name="glucose_level" value="186" step="0.1" required></label>
+            <label><span>Blood Pressure</span><input type="number" name="blood_pressure" value="142" step="0.1" required></label>
+          </div>
+          <div class="grid three">
+            <label><span>Cholesterol</span><input type="number" name="cholesterol" value="228" step="0.1" required></label>
+            <label><span>BMI</span><input type="number" name="bmi" value="31.4" step="0.1" required></label>
+            <label><span>Symptom Severity</span><input type="number" name="symptom_severity" value="7" min="1" max="10" required></label>
+          </div>
+          <div class="grid three">
+            <label><span>Activity Level</span><input type="number" name="activity_level" value="4" min="1" max="10" required></label>
+            <label class="toggle">
+              <span>Diabetes History</span>
+              <input type="checkbox" name="has_diabetes_history" checked>
+            </label>
+            <label class="toggle">
+              <span>Hypertension History</span>
+              <input type="checkbox" name="has_hypertension_history" checked>
+            </label>
+          </div>
+          <label>
+            <span>Clinical Notes</span>
+            <textarea name="notes" rows="4">Patient reports fatigue, blurred vision, and reduced exercise tolerance over the last two weeks.</textarea>
+          </label>
+          <button type="submit" class="button primary full">Run AI Prediction</button>
+        </form>
+      </section>
+
+      <section class="panel result-panel">
+        <div class="panel-header">
+          <h2>Prediction Output</h2>
+          <p>Risk score, interventions, and a generated report appear here.</p>
+        </div>
+        <div id="result-card" class="result-card empty">
+          <p>Submit the intake form to see the generated healthcare AI output.</p>
+        </div>
+        <div id="report-card" class="report-card"></div>
+      </section>
+    </main>
+
+    <section class="secondary-grid">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Batch Upload Preview</h2>
+          <p>Upload a CSV and inspect the first few parsed rows.</p>
+        </div>
+        <form id="upload-form" class="upload-form">
+          <input type="file" id="patient-file" name="file" accept=".csv" required>
+          <button type="submit" class="button secondary">Preview Upload</button>
+        </form>
+        <div id="upload-preview" class="table-shell muted">No file uploaded yet.</div>
+      </section>
+
+      <section id="history-panel" class="panel">
+        <div class="panel-header">
+          <h2>Prediction History</h2>
+          <p>Recent assessments generated by the backend demo.</p>
+        </div>
+        <div id="history-list" class="history-list muted">History is loading...</div>
+      </section>
+    </section>
+  </div>
+
+  <script src="/assets/app.js"></script>
+</body>
+</html>

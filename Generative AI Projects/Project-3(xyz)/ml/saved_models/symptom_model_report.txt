@@ -1,0 +1,13 @@
+Best model: logistic_regression
+Scores: {'logistic_regression': 0.99, 'decision_tree': 0.86, 'random_forest': 0.91}
+
+              precision    recall  f1-score   support
+
+ Common Cold       1.00      0.94      0.97        17
+         Flu       1.00      1.00      1.00        33
+    Migraine       0.94      1.00      0.97        15
+   Pneumonia       1.00      1.00      1.00        35
+
+    accuracy                           0.99       100
+   macro avg       0.98      0.99      0.98       100
+weighted avg       0.99      0.99      0.99       100
